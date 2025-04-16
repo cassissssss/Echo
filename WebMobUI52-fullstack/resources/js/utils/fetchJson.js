@@ -109,11 +109,11 @@ export function fetchJson(options) {
       });
   });
 
-  console.log('➡️ [fetchJson] URL demandée :', url)
-  console.log('➡️ [fetchJson] Méthode :', theMethod)
-  console.log('➡️ [fetchJson] Full URL finale :', fullUrl)
-  console.log('➡️ [fetchJson] Headers :', allHeaders)
-  console.log('➡️ [fetchJson] Body :', body)
+  // console.log('[fetchJson] URL demandée :', url)
+  // console.log('[fetchJson] Méthode :', theMethod)
+  // console.log('[fetchJson] Full URL finale :', fullUrl)
+  // console.log('[fetchJson] Headers :', allHeaders)
+  // console.log('[fetchJson] Body :', body)
 
   return {
     request,

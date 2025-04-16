@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import { setDefaultHeaders, setDefaultBaseUrl } from '@/utils/fetchJson.js';
 import App from './App.vue';
 import router from './router';
+import '../css/custom-theme.css'
 
 setDefaultBaseUrl('http://127.0.0.1:8000/api')
 

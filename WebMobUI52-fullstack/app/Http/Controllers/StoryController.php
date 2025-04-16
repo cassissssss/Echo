@@ -11,7 +11,17 @@ class StoryController extends Controller
 {
     public function getStories(): JsonResponse
     {
-        $stories = Story::with('chapters.choices')->get();
+        $stories = Story::all()->map(function ($story) {
+            return [
+                'id' => $story->id,
+                'title' => $story->title,
+                'summary' => $story->summary,
+                'author' => $story->author,
+                'cover' => $story->cover ?? null, // facultatif, à gérer
+                'playable' => $story->summary !== null && $story->summary !== ''
+            ];
+        });
+
         return response()->json($stories);
     }
 
