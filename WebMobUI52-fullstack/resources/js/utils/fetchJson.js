@@ -93,9 +93,9 @@ export function fetchJson(options) {
                 data: null,
               }))
               .catch(() => reject({
-                  status: resp.status,
-                  statusText: 'Error parsing response body',
-                  data: null,
+                status: resp.status,
+                statusText: 'Error parsing response body',
+                data: null,
               }));
           });
       })
@@ -108,6 +108,12 @@ export function fetchJson(options) {
         }
       });
   });
+
+  console.log('➡️ [fetchJson] URL demandée :', url)
+  console.log('➡️ [fetchJson] Méthode :', theMethod)
+  console.log('➡️ [fetchJson] Full URL finale :', fullUrl)
+  console.log('➡️ [fetchJson] Headers :', allHeaders)
+  console.log('➡️ [fetchJson] Body :', body)
 
   return {
     request,

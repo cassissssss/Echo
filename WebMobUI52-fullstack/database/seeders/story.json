@@ -1,0 +1,32 @@
+{
+  "title": "L'île du destin",
+  "summary": "Une aventure mystérieuse sur une île perdue.",
+  "author": "Jules",
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "content": "Vous vous réveillez sur une plage inconnue.",
+      "choices": [
+        { "text": "Explorer la jungle", "next_chapter": 2 },
+        { "text": "Rester sur place", "next_chapter": 3 }
+      ]
+    },
+    {
+      "chapter_number": 2,
+      "content": "La jungle est dense et dangereuse.",
+      "choices": [
+        { "text": "Grimper à un arbre", "next_chapter": 4 }
+      ]
+    },
+    {
+      "chapter_number": 3,
+      "content": "Vous attendez... mais personne ne vient.",
+      "choices": []
+    },
+    {
+      "chapter_number": 4,
+      "content": "Du haut de l’arbre, vous apercevez une fumée.",
+      "choices": []
+    }
+  ]
+}
