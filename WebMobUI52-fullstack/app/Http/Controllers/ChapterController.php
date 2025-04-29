@@ -23,9 +23,13 @@ class ChapterController extends Controller
         return response()->json($chapter, 201);
     }
 
-    public function getChapter(Chapter $chapter): JsonResponse
+    public function getChapter(int $id): JsonResponse
     {
-        $chapter->load('choices');
+        $chapter = Chapter::with('choices')->find($id);
+
+        if (!$chapter) {
+            return response()->json(['message' => 'Chapitre introuvable.'], 404);
+        }
 
         return response()->json($chapter);
     }

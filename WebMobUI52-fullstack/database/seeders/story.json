@@ -6,20 +6,72 @@
   "chapters": [
     {
       "chapter_number": 1,
-      "content": "Vous vous réveillez sur une plage inconnue.",
-      "choices": [
-        { "text": "Explorer la jungle", "next_chapter": 2 },
-        { "text": "Rester sur place", "next_chapter": 3 }
-      ]
-    },
-    {
-      "chapter_number": 2,
-      "content": "La jungle est dense et dangereuse.",
+      "content": "Après avoir roulé des heures, ton pneu éclate en pleine nuit. Au loin, une lumière vacille. Tu avances, porté par l’espoir… jusqu’à ce qu’un château immense apparaisse devant toi.",
+      "image": "/images/chapters/moon-castle.png",
       "choices": []
     },
     {
+      "chapter_number": 2,
+      "content": "Tu arrives devant le château. L'air est étrange, chargé d'une tension électrique. La porte entrouverte t'accueille.",
+      "image": "/images/chapters/door.png",
+      "choices": [
+        { "text": "Rentrer dans le château, car rien ne t'effraie et tu as besoin d'aide...", "next_chapter": 3 },
+        { "text": "Retourner à la voiture : tu n'es pas dans un film d'horreur, où les protagonistes foncent vers le danger !", "next_chapter": 4 }
+      ]
+    },
+    {
       "chapter_number": 3,
-      "content": "Vous attendez... mais personne ne vient.",
+      "content": "Tu pénètres dans le hall. Une tapisserie tombe au sol... un courant d'air ?",
+      "choices": [
+        { "text": "Explorer la salle de droite", "next_chapter": 5 },
+        { "text": "Monter les escaliers", "next_chapter": 6 }
+      ]
+    },
+    {
+      "chapter_number": 4,
+      "content": "En contournant le château, tu découvres une porte de service entrouverte.",
+      "choices": [
+        { "text": "Rentrer discrètement", "next_chapter": 5 },
+        { "text": "Faire demi-tour", "next_chapter": 7 }
+      ]
+    },
+    {
+      "chapter_number": 5,
+      "content": "Tu entres dans une bibliothèque ancienne. Un grincement se fait entendre.",
+      "choices": [
+        { "text": "Chercher la source du bruit", "next_chapter": 8 },
+        { "text": "Ignorer et lire un livre", "next_chapter": 9 }
+      ]
+    },
+    {
+      "chapter_number": 6,
+      "content": "Tu montes et arrives devant une porte entrouverte. Une voix t'appelle par ton prénom.",
+      "choices": [
+        { "text": "Répondre à la voix", "next_chapter": 8 },
+        { "text": "Fuir en courant", "next_chapter": 7 }
+      ]
+    },
+    {
+      "chapter_number": 7,
+      "content": "Tu fuis à travers la forêt sans te retourner. Le château disparaît derrière les arbres.",
+      "choices": []
+    },
+    {
+      "chapter_number": 8,
+      "content": "Tu trouves un miroir ancien. Ton reflet ne te suit pas...",
+      "choices": [
+        { "text": "Toucher le miroir", "next_chapter": 10 },
+        { "text": "Reculer lentement", "next_chapter": 7 }
+      ]
+    },
+    {
+      "chapter_number": 9,
+      "content": "Le livre t'absorbe. Des mots brillent : « Bienvenue, Echo. »",
+      "choices": []
+    },
+    {
+      "chapter_number": 10,
+      "content": "Tu passes à travers le miroir. Une autre version de toi t’attend...",
       "choices": []
     }
   ]
