@@ -6,11 +6,9 @@ const { data: stories, error, loading } = useFetchJson('/stories')
 const router = useRouter()
 
 function openStory(story) {
-  if (!story.playable) return
   router.push(`/story/${story.id}`)
 }
 </script>
-
 
 <template>
   <div class="page">
@@ -20,13 +18,11 @@ function openStory(story) {
         v-for="story in stories"
         :key="story.id"
         class="story"
-        :class="{ inactive: !story.playable }"
         @click="openStory(story)"
-      >
+        >
         <img :src="story.cover" class="cover" />
         <h2>{{ story.title }}</h2>
-        <p v-if="story.playable">{{ story.summary }}</p>
-        <p v-else class="soon">En cours d'écriture...</p>
+        <p>{{ story.summary }}</p>
       </div>
     </div>
   </div>
@@ -57,17 +53,14 @@ function openStory(story) {
   border-radius: 10px;
   width: 300px;
   cursor: pointer;
+  transition: transform 0.3s;
 }
-.story.inactive {
-  opacity: 0.4;
-  cursor: not-allowed;
+.story:hover {
+  transform: scale(1.03);
 }
 .cover {
   width: 100%;
   border-radius: 8px;
-}
-.soon {
-  font-style: italic;
-  opacity: 0.7;
+  margin-bottom: 1rem;
 }
 </style>

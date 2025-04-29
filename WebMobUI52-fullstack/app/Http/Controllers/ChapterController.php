@@ -23,7 +23,7 @@ class ChapterController extends Controller
         return response()->json($chapter, 201);
     }
 
-    public function show(Chapter $chapter): JsonResponse
+    public function getChapter(Chapter $chapter): JsonResponse
     {
         $chapter->load('choices');
 

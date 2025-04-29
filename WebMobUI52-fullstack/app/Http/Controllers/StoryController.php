@@ -17,8 +17,7 @@ class StoryController extends Controller
                 'title' => $story->title,
                 'summary' => $story->summary,
                 'author' => $story->author,
-                'cover' => $story->cover ?? null, // facultatif, à gérer
-                'playable' => $story->summary !== null && $story->summary !== ''
+                'cover' => $story->cover ?? null,
             ];
         });
 
@@ -47,5 +46,29 @@ class StoryController extends Controller
     {
         $story->delete();
         return response()->json(['message' => 'Story deleted successfully']);
+    }
+
+    public function getFirstChapter(Story $story): JsonResponse
+    {
+        $chapter = $story->chapters()
+            ->with('choices')
+            ->orderBy('chapter_number')
+            ->first();
+
+        if (!$chapter) {
+            return response()->json(['message' => 'Aucun chapitre trouvé'], 404);
+        }
+
+        return response()->json([
+            'chapter' => [
+                'id' => $chapter->id,
+                'content' => $chapter->content,
+            ],
+            'choices' => $chapter->choices->map(fn($choice) => [
+                'id' => $choice->id,
+                'text' => $choice->text,
+                'next_chapter_id' => $choice->next_chapter_id,
+            ])
+        ]);
     }
 }

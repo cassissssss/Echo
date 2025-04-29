@@ -19,7 +19,7 @@ class StorySeeder extends Seeder
             'title' => $storyData['title'],
             'summary' => $storyData['summary'],
             'author' => $storyData['author'],
-            'cover' => $storyData['cover'] ?? null, // 👈 ici
+            'cover' => $storyData['cover'] ?? null,
         ]);
 
 

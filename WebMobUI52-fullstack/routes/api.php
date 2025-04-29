@@ -15,6 +15,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/stories/{id}', [StoryController::class, 'deleteStory']);
 
     // Routes pour les chapitres
+    Route::get('/stories/{story}/first-chapter', [StoryController::class, 'getFirstChapter']);
     Route::get('/chapters', [ChapterController::class, 'getChapters']);
     Route::get('/chapters/{id}', [ChapterController::class, 'getChapter']);
     Route::post('/chapters', [ChapterController::class, 'createChapter']);
