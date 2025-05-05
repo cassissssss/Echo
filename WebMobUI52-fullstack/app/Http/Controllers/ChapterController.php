@@ -31,8 +31,20 @@ class ChapterController extends Controller
             return response()->json(['message' => 'Chapitre introuvable.'], 404);
         }
 
-        return response()->json($chapter);
+        return response()->json([
+            'id' => $chapter->id,
+            'chapter_number' => $chapter->chapter_number,
+            'content' => $chapter->content,
+            'image' => $chapter->image,
+            'is_ending' => $chapter->is_ending,
+            'choices' => $chapter->choices->map(fn($choice) => [
+                'id' => $choice->id,
+                'text' => $choice->text,
+                'next_chapter_id' => $choice->next_chapter_id,
+            ])
+        ]);
     }
+
 
     public function update(UpdateChapterRequest $request, Chapter $chapter): JsonResponse
     {

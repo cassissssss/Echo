@@ -28,10 +28,22 @@
         </div>
 
         <div v-else class="play-wrapper">
-          <button class="play-button" @click="continueStory" aria-label="Continuer">
-            <svg xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 0 24 24" fill="white">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+          <button class="torch-button" @click="continueStory" aria-label="Continuer">
+            <img src="/images/icons/torch.png" alt="Continuer" class="torch-icon" />
+          </button>
+        </div>
+      </div>
+    </transition>
+
+    <!-- Modal de fin -->
+    <transition name="fade">
+      <div v-if="showEndingModal" class="modal-overlay">
+        <div class="modal">
+          <h2>FIN</h2>
+          <p>Tu as terminé ton histoire</p>
+          <p>Mais il reste d'autres chemins à explorer !</p>
+          <button class="restart-button" @click="restartStory">
+            Recommencer
           </button>
         </div>
       </div>
@@ -50,9 +62,11 @@ const router = useRouter()
 const data = ref(null)
 const error = ref(null)
 const showContent = ref(false)
+const showEndingModal = ref(false)
 
 async function fetchChapter() {
   showContent.value = false
+  showEndingModal.value = false
 
   const storyId = route.params.storyId
   const chapterId = route.params.chapterId
@@ -67,7 +81,7 @@ async function fetchChapter() {
     data.value = d.value
     error.value = e.value
     showContent.value = true
-  }, 300) // ➔ petit délai pour laisser la transition se faire
+  }, 300)
 }
 
 fetchChapter()
@@ -78,10 +92,21 @@ function goToChapter(nextId) {
 }
 
 function continueStory() {
-  const chapterIdParam = route.params.chapterId
-  const currentChapterId = chapterIdParam ? parseInt(chapterIdParam) : 1
-  const nextChapterId = currentChapterId + 1
-  router.push(`/story/${route.params.storyId}/chapter/${nextChapterId}`)
+  const isEnding = data.value?.is_ending ?? data.value?.chapter?.is_ending
+  const hasChoices = (data.value?.choices ?? data.value?.chapter?.choices)?.length > 0
+
+  if (isEnding && !hasChoices) {
+    showEndingModal.value = true
+  } else {
+    const chapterIdParam = route.params.chapterId
+    const currentChapterId = chapterIdParam ? parseInt(chapterIdParam) : 1
+    const nextChapterId = currentChapterId + 1
+    router.push(`/story/${route.params.storyId}/chapter/${nextChapterId}`)
+  }
+}
+
+function restartStory() {
+  router.push(`/story/${route.params.storyId}`)
 }
 </script>
 
@@ -114,13 +139,31 @@ function continueStory() {
 .image-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.6rem;
+  margin-bottom: 2rem;
 }
 
 .scene-image {
-  max-width: 260px;
+  max-width: 320px;
   width: 100%;
   border-radius: 12px;
+  image-rendering: pixelated;
+  border: 2px solid white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInImage 1.2s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.scene-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes fadeInImage {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .chapter-text {
@@ -153,16 +196,86 @@ function continueStory() {
   margin-top: 2rem;
 }
 
-.play-button {
+.torch-button {
   background: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s, fill 0.2s;
+  animation: pulse 2s infinite ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
 }
 
-.play-button:hover svg {
-  fill: #ffb100;
+.torch-icon {
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px #ffb100);
+  transition: transform 0.3s ease;
+}
+
+.torch-button:hover .torch-icon {
   transform: scale(1.2);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal {
+  background: #22092c;
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  font-size: 1.3rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.restart-button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  border: none;
+  background: #ffb100;
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+  color: #22092c;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.restart-button:hover {
+  background: #e09a00;
 }
 
 .info {

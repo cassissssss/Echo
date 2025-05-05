@@ -21,19 +21,18 @@
     },
     {
       "chapter_number": 3,
-      "content": "Tu pénètres dans le hall. Une tapisserie tombe au sol... un courant d'air ?",
+      "content": "Tu pénètres dans le hall. Tu ne vois pas grand chose dans la pénombre. ",
       "choices": [
-        { "text": "Explorer la salle de droite", "next_chapter": 5 },
-        { "text": "Monter les escaliers", "next_chapter": 6 }
+        { "text": "Tu prends ton téléphones et allumes la lampe torche", "next_chapter": 5 },
+        { "text": "Tu touches les murs pour espérer tomber sur un interrupteur", "next_chapter": 6 }
       ]
     },
     {
       "chapter_number": 4,
-      "content": "En contournant le château, tu découvres une porte de service entrouverte.",
-      "choices": [
-        { "text": "Rentrer discrètement", "next_chapter": 5 },
-        { "text": "Faire demi-tour", "next_chapter": 7 }
-      ]
+      "content": "Tu prends donc le chemin de retour jusqu'à ta voiture. En arrivant, tu appelles la dépanneuse. Pendant ce temps, tu manges tes biscuits. Tu es soulagé de ne pas être entré dans ce château lugubre. Mais au fond de toi, tu sais que tu as raté quelque chose d'important...",
+      "image": "/images/chapters/car.png",
+      "is_ending": true,
+      "choices": []
     },
     {
       "chapter_number": 5,

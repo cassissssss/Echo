@@ -63,6 +63,7 @@ class StoryController extends Controller
             'chapter' => [
                 'id' => $chapter->id,
                 'content' => $chapter->content,
+                'image' => $chapter->image,
             ],
             'choices' => $chapter->choices->map(fn($choice) => [
                 'id' => $choice->id,
