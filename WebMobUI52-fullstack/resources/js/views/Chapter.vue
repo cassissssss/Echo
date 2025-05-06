@@ -21,7 +21,7 @@
             v-for="choice in data.choices ?? data.chapter.choices"
             :key="choice.id"
             class="choice-link"
-            @click="goToChapter(choice.next_chapter_id)"
+            @click="goToChapter(choice.next_chapter_id, choice.traits)"
           >
             {{ choice.text }}
           </div>
@@ -55,6 +55,7 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useFetchJson } from '@/composables/useFetchJson'
+import { addTrait, getFinalPersonality } from '@/composables/usePersonalityTracker'
 
 const route = useRoute()
 const router = useRouter()
@@ -63,6 +64,24 @@ const data = ref(null)
 const error = ref(null)
 const showContent = ref(false)
 const showEndingModal = ref(false)
+
+const endings = {
+  sorciere: 25,
+  guerriere: 26,
+  fee: 27,
+  reine: 28,
+  chevalier: 29,
+  barde: 30,
+  dragon: 36,
+  paysan: 37
+}
+
+function normalizePersona(str) {
+  return str
+    .normalize("NFD") 
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+}
 
 async function fetchChapter() {
   showContent.value = false
@@ -81,22 +100,39 @@ async function fetchChapter() {
     data.value = d.value
     error.value = e.value
     showContent.value = true
+
+    // Redirection automatique si chest room
+    const isChestRoom = d.value?.is_chest_room
+    if (isChestRoom) {
+      const persona = getFinalPersonality()
+      const target = endings[persona] || 30
+      router.push(`/story/${storyId}/chapter/${target}`)
+    }
   }, 300)
 }
 
 fetchChapter()
 watch(() => route.params.chapterId, fetchChapter)
 
-function goToChapter(nextId) {
+function goToChapter(nextId, traits) {
+  if (traits && traits.length > 0) {
+    traits.forEach(trait => addTrait(trait))
+  }
   router.push(`/story/${route.params.storyId}/chapter/${nextId}`)
 }
 
 function continueStory() {
-  const isEnding = data.value?.is_ending ?? data.value?.chapter?.is_ending
-  const hasChoices = (data.value?.choices ?? data.value?.chapter?.choices)?.length > 0
+  const isEnding = data.value?.is_ending
+  const hasChoices = data.value?.choices?.length > 0
 
   if (isEnding && !hasChoices) {
-    showEndingModal.value = true
+    if (data.value?.is_chest_room) {
+      const persona = getFinalPersonality()
+      const slug = normalizePersona(persona)
+      router.push(`/story/${route.params.storyId}/ending/${slug}`)
+    } else {
+      showEndingModal.value = true
+    }
   } else {
     const chapterIdParam = route.params.chapterId
     const currentChapterId = chapterIdParam ? parseInt(chapterIdParam) : 1

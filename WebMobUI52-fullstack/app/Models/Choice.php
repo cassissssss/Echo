@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Choice extends Model
 {
-    protected $fillable = ['text', 'chapter_id', 'next_chapter_id'];
+    protected $fillable = ['text', 'chapter_id', 'next_chapter_id', 'traits'];
+
+    protected $casts = [
+        'traits' => 'array',
+    ];
 
     public function chapter(): BelongsTo
     {

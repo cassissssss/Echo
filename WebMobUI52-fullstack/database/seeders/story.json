@@ -6,7 +6,7 @@
   "chapters": [
     {
       "chapter_number": 1,
-      "content": "Après avoir roulé des heures, ton pneu éclate en pleine nuit. Au loin, une lumière vacille. Tu avances, porté par l’espoir… jusqu’à ce qu’un château immense apparaisse devant toi.",
+      "content": "Après avoir roulé des heures, ton pneu éclate en pleine nuit. Au loin, une lumière vacille. Tu avances, jusqu’à ce qu’un château immense apparaisse devant toi.",
       "image": "/images/chapters/moon-castle.png",
       "choices": []
     },
@@ -15,62 +15,459 @@
       "content": "Tu arrives devant le château. L'air est étrange, chargé d'une tension électrique. La porte entrouverte t'accueille.",
       "image": "/images/chapters/door.png",
       "choices": [
-        { "text": "Rentrer dans le château, car rien ne t'effraie et tu as besoin d'aide...", "next_chapter": 3 },
-        { "text": "Retourner à la voiture : tu n'es pas dans un film d'horreur, où les protagonistes foncent vers le danger !", "next_chapter": 4 }
+        {
+          "text": "Rentrer dans le château, car rien ne t'effraie et tu as besoin d'aide...",
+          "next_chapter": 3,
+          "traits": ["courage", "curiosité"]
+        },
+        {
+          "text": "Retourner à la voiture : tu n'es pas dans un film d'horreur, où les protagonistes foncent vers le danger !",
+          "next_chapter": 4
+        }
       ]
     },
     {
       "chapter_number": 3,
       "content": "Tu pénètres dans le hall. Tu ne vois pas grand chose dans la pénombre. ",
+      "image": "/images/chapters/dark-entry.png",
       "choices": [
-        { "text": "Tu prends ton téléphones et allumes la lampe torche", "next_chapter": 5 },
-        { "text": "Tu touches les murs pour espérer tomber sur un interrupteur", "next_chapter": 6 }
+        {
+          "text": "Tu prends ton téléphones et allumes la lampe torche",
+          "next_chapter": 5,
+          "traits": ["initiative", "précaution"]
+        },
+        {
+          "text": "Tu touches les murs pour espérer tomber sur un interrupteur",
+          "next_chapter": 6,
+          "traits": ["observation", "calme"]
+        }
       ]
     },
     {
       "chapter_number": 4,
-      "content": "Tu prends donc le chemin de retour jusqu'à ta voiture. En arrivant, tu appelles la dépanneuse. Pendant ce temps, tu manges tes biscuits. Tu es soulagé de ne pas être entré dans ce château lugubre. Mais au fond de toi, tu sais que tu as raté quelque chose d'important...",
+      "content": "Tu prends donc le chemin de retour jusqu'à ta voiture. En arrivant, tu appelles la dépanneuse. Pendant ce temps, tu manges tes biscuits. Tu es soulagé de ne pas être entré dans ce château lugubre mais au fond de toi, tu sais que tu as raté quelque chose d'important...",
       "image": "/images/chapters/car.png",
       "is_ending": true,
       "choices": []
     },
     {
-      "chapter_number": 5,
-      "content": "Tu entres dans une bibliothèque ancienne. Un grincement se fait entendre.",
-      "choices": [
-        { "text": "Chercher la source du bruit", "next_chapter": 8 },
-        { "text": "Ignorer et lire un livre", "next_chapter": 9 }
-      ]
+  "chapter_number": 5,
+  "content": "La lumière de ton téléphone éclaire une immense bibliothèque aux rayons de livres infinis. L’air y est chargé de poussière. Une silhouette traverse le fond de la pièce...",
+  "image": "/images/chapters/library.png",
+  "choices": [
+    {
+      "text": "Suivre la silhouette en silence",
+      "next_chapter": 7,
+      "traits": ["curiosité", "discrétion"]
     },
     {
-      "chapter_number": 6,
-      "content": "Tu montes et arrives devant une porte entrouverte. Une voix t'appelle par ton prénom.",
-      "choices": [
-        { "text": "Répondre à la voix", "next_chapter": 8 },
-        { "text": "Fuir en courant", "next_chapter": 7 }
-      ]
+      "text": "Ignorer et inspecter les livres",
+      "next_chapter": 8,
+      "traits": ["émerveillement", "calme"]
+    }
+  ]
+},
+{
+  "chapter_number": 6,
+  "content": "En inspectant les livres, tu trouves un interrupteur. Une lumière rouge s’allume dans un coin du plafond. Une voix métallique résonne : « Code requis pour déverrouiller l'accès. »",
+  "image": "/images/chapters/redlight.png",
+  "choices": [
+    {
+      "text": "Chercher un indice dans la pièce",
+      "next_chapter": 9,
+      "traits": ["observation", "intuition"]
     },
     {
-      "chapter_number": 7,
-      "content": "Tu fuis à travers la forêt sans te retourner. Le château disparaît derrière les arbres.",
+      "text": "Forcer la porte verrouillée à côté",
+      "next_chapter": 10,
+      "traits": ["impulsivité", "puissance"]
+    }
+  ]
+},
+{
+  "chapter_number": 7,
+  "content": "La silhouette disparaît derrière un rideau. Tu t'approches et découvres un escalier en colimaçon qui descend dans les entrailles du château. Une torche est allumée sur le mur.",
+  "image": "/images/chapters/spiral-stairs.png",
+  "choices": [
+    {
+      "text": "Descendre l’escalier",
+      "next_chapter": 11,
+      "traits": ["courage", "prise_de_risque"]
+    },
+    {
+      "text": "Faire demi-tour",
+      "next_chapter": 8,
+      "traits": ["prudence"]
+    }
+  ]
+},
+{
+  "chapter_number": 8,
+  "content": "Les livres semblent normaux, jusqu’à ce qu’un ouvrage noir attire ton regard. Il semble… te regarder en retour. Une inscription brille : « Echo ». Tu sens ton cœur ralentir.",
+  "image": "/images/chapters/book.png",
+  "choices": [
+    {
+      "text": "Ouvrir le livre",
+      "next_chapter": 12,
+      "traits": ["curiosité", "mystère"]
+    },
+    {
+      "text": "Le refermer avec calme",
+      "next_chapter": 6,
+      "traits": ["prudence", "maîtrise_de_soi"]
+    }
+  ]
+},
+{
+  "chapter_number": 9,
+  "content": "Tu observes la pièce : une vieille horloge affiche 11:11, une trappe poussiéreuse au sol semble avoir été récemment utilisée, sur le mur se trouve un miroir fissuré te reflète… sans que tu ne bouges.",
+  "image": "/images/chapters/mirror-clue.png",
+  "choices": [
+    {
+      "text": "Ouvrir la trappe lentement",
+      "next_chapter": 13,
+      "traits": ["prudence", "observation"]
+    },
+    {
+      "text": "Briser le miroir, par instinct",
+      "next_chapter": 14,
+      "traits": ["impulsivité", "mystère"]
+    }
+  ]
+},
+{
+  "chapter_number": 10,
+  "content": "Tu fonces contre la porte. Elle cède dans un grincement brutal. Tu tombes dans une pièce circulaire. Une statue t’observe avec un regard vide… et pourtant vivant.",
+  "image": "/images/chapters/statue.png",
+  "choices": [
+    {
+      "text": "Tu touches la statue",
+      "next_chapter": 15,
+      "traits": ["prise_de_risque", "courage"]
+    },
+    {
+      "text": "Tu lui parles comme si elle allait aller te répondre",
+      "next_chapter": 16,
+      "traits": ["créativité", "intuition"]
+    }
+  ]
+},
+{
+  "chapter_number": 11,
+  "content": "Tu descends. L’escalier grince mais semble sans fin. Une porte en métal se dresse devant toi. Trois symboles y sont gravés : une clé, une flamme, une goutte.",
+  "image": "/images/chapters/symbol-door.png",
+  "choices": [
+    {
+      "text": "Appuyer sur la clé",
+      "next_chapter": 17,
+      "traits": ["logique", "curiosité"]
+    },
+    {
+      "text": "Appuyer sur la flamme",
+      "next_chapter": 18,
+      "traits": ["audace", "instinct"]
+    },
+    {
+      "text": "Appuyer sur la goutte",
+      "next_chapter": 19,
+      "traits": ["calme", "émotion"]
+    }
+  ]
+},
+{
+  "chapter_number": 12,
+  "content": "À l’instant où tu ouvres le livre, une brume s’échappe et te plonge dans une autre pièce. Tu ne sais pas si tu es encore dans le château… ou dans ses souvenirs.",
+  "image": "/images/chapters/fog-room.png",
+  "choices": [
+    {
+      "text": "Tu avances sans te retourner",
+      "next_chapter": 20,
+      "traits": ["volonté", "mystère"]
+    },
+    {
+      "text": "Tu appelles à voix haute",
+      "next_chapter": 21,
+      "traits": ["humour", "imprudence"]
+    }
+  ]
+},
+{
+  "chapter_number": 13,
+  "content": "La trappe grince. Tu descends dans un tunnel étroit. Une torche tremble au mur, et un message gravé dans la pierre : « L’obscurité révèle ceux qui l’embrassent. »",
+  "image": "/images/chapters/tunnel.png",
+  "choices": [
+    {
+      "text": "Avancer sans la torche",
+      "next_chapter": 22,
+      "traits": ["intuition", "courage"]
+    },
+    {
+      "text": "Prendre la torche et suivre les symboles",
+      "next_chapter": 23,
+      "traits": ["précaution", "logique"]
+    }
+  ]
+},
+{
+  "chapter_number": 14,
+  "content": "Tu brises le miroir. Derrière, un œil peint t’observe. En le touchant, un souffle glacial t’envahit et une trappe s’ouvre à tes pieds.",
+  "image": "/images/chapters/broken-mirror.png",
+  "choices": [
+    {
+      "text": "Sauter dans la trappe",
+      "next_chapter": 24,
+      "traits": ["prise_de_risque", "mystère"]
+    },
+    {
+      "text": "Chercher un autre passage",
+      "next_chapter": 25,
+      "traits": ["observation", "prudence"]
+    }
+  ]
+},
+{
+  "chapter_number": 15,
+  "content": "La statue s’anime. Elle murmure : « Connais-tu ta propre vérité ? » Un mécanisme s’ouvre derrière elle.",
+  "image": "/images/chapters/animated-statue.png",
+  "choices": [
+    {
+      "text": "Entrer dans le passage",
+      "next_chapter": 26,
+      "traits": ["audace", "mystère"]
+    },
+    {
+      "text": "Rester et interroger la statue",
+      "next_chapter": 27,
+      "traits": ["curiosité", "observation"]
+    }
+  ]
+},
+{
+  "chapter_number": 16,
+  "content": "Tu t’adresses à la statue. Elle éclate de rire : « Enfin quelqu’un d’amusant ! » Une pièce secrète s’ouvre sous ses pieds.",
+  "image": "/images/chapters/statue-laughs.png",
+  "choices": [
+    {
+      "text": "Surpris mais calme tu descends dans la pièce",
+      "next_chapter": 28,
+      "traits": ["créativité", "audace"]
+    },
+    {
+      "text": "Tu rebrousses chemin prudemment, cette statue est bien trop étrange",
+      "next_chapter": 25,
+      "traits": ["prudence", "réflexion"]
+    }
+  ]
+},
+{
+  "chapter_number": 17,
+  "content": "La clé déclenche un escalier descendant en colimaçon. Au fond, une pièce scellée t’attend.",
+  "image": "/images/chapters/key-room.png",
+  "choices": [
+    {
+      "text": "Entrer directement",
+      "next_chapter": 22,
+      "traits": ["structure", "décision"]
+    },
+    {
+      "text": "Observer la porte d’abord",
+      "next_chapter": 25,
+      "traits": ["analyse", "calme"]
+    }
+  ]
+},
+{
+  "chapter_number": 18,
+  "content": "La flamme s’allume et consume un rideau, révélant une crypte. Une dalle vibre sous tes pieds.",
+  "image": "/images/chapters/crypt.png",
+  "choices": [
+    {
+      "text": "Descendre",
+      "next_chapter": 26,
+      "traits": ["bravoure", "curiosité"]
+    },
+    {
+      "text": "Chercher un levier caché",
+      "next_chapter": 27,
+      "traits": ["logique", "prudence"]
+    }
+  ]
+},
+{
+  "chapter_number": 19,
+  "content": "Un souffle d’air humide t’aspire dans une salle aquatique. Une musique résonne doucement.",
+  "image": "/images/chapters/water-hall.png",
+  "choices": [
+    {
+      "text": "Suivre la musique",
+      "next_chapter": 28,
+      "traits": ["émotion", "intuition"]
+    },
+    {
+      "text": "Se boucher les oreilles et courir ; tu n’aimes pas l’eau",
+      "next_chapter": 24,
+      "traits": ["instinct", "méfiance"]
+    }
+  ]
+},
+{
+  "chapter_number": 20,
+  "content": "La brume s’épaissit. Un chemin pavé de symboles anciens te guide vers une salle aux mille reflets.",
+  "image": "/images/chapters/mirror-labyrinth.png",
+  "choices": [
+    {
+      "text": "Tu suis ton reflet",
+      "next_chapter": 29,
+      "traits": ["mystère", "doute"]
+    },
+    {
+      "text": "Tu fermes les yeux et marches au hasard",
+      "next_chapter": 30,
+      "traits": ["foi", "instinct"]
+    }
+  ]
+},
+{
+  "chapter_number": 21,
+  "content": "Ta voix résonne. Quelque chose répond… en imitant ta voix. Tu n’es plus seul.",
+  "image": "/images/chapters/echo.png",
+  "choices": [
+    {
+      "text": "Tu cherches la source de la voix",
+      "next_chapter": 30,
+      "traits": ["courage", "curiosité"]
+    },
+    {
+      "text": "Tu te taits et écoute la voix mystérieuse",
+      "next_chapter": 29,
+      "traits": ["méfiance", "analyse"]
+    }
+  ]
+},
+{
+  "chapter_number": 22,
+  "content": "Tu arrives dans une salle voûtée. En son centre : un coffre ancien, scellé par des runes. Une inscription apparaît lentement : « Celui ou celle que tu es te guidera à l’intérieur. »",
+  "image": "/images/chapters/chest-room.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+  "chapter_number": 23,
+  "content": "Une bibliothèque circulaire. Au milieu : un pupitre avec un coffre fermé. Une lumière pulsante s’en échappe, accompagnée d’un souffle gelé.",
+  "image": "/images/chapters/library-chest.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+  "chapter_number": 24,
+  "content": "Tu arrives dans une pièce tapissée de miroirs. Dans l’un d’eux, ton reflet te sourit… mais n’imite pas tes gestes. Devant toi : un coffre d’ébène.",
+  "image": "/images/chapters/mirror-chest.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+  "chapter_number": 25,
+  "content": "Tu ouvres le coffre. Une lumière verte s’échappe et enveloppe la pièce. À l’intérieur, un miroir brisé : tu vois une silhouette encapuchonnée.",
+  "image": "/images/chapters/persona-witch.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+  "chapter_number": 26,
+  "content": "Un choc de métal. L’armure exposée dans le coffre s’anime et te salue.",
+  "image": "/images/chapters/persona-warrior.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+  "chapter_number": 27,
+  "content": "Des lucioles s’échappent du coffre, dessinant une forme ailée.",
+  "image": "/images/chapters/persona-fairy.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+  "chapter_number": 28,
+  "content": "Une couronne repose sur du velours. En la posant sur ta tête, les murs s’inclinent.",
+  "image": "/images/chapters/persona-queen.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+  "chapter_number": 29,
+  "content": "Une épée attend dans le coffre. Tu la reconnais sans l’avoir vue avant.",
+  "image": "/images/chapters/persona-knight.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+  "chapter_number": 30,
+  "content": "Un luth miniature repose dans la boîte. En le touchant, tu entends une vieille chanson que seul toi connais.",
+  "image": "/images/chapters/persona-bard.png",
+  "is_chest_room": true,
+  "is_ending": true,
+  "choices": []
+},
+{
+      "chapter_number": 31,
+      "content": "Une salle en pierre brute. Un feu couve au centre, protégé par un cercle de griffes noires. Au fond, un coffre recouvert d’écailles, irradiant une chaleur contenue.",
+      "image": "/images/chapters/dragon-chest.png",
+      "is_chest_room": true,
+      "is_ending": true,
       "choices": []
     },
     {
-      "chapter_number": 8,
-      "content": "Tu trouves un miroir ancien. Ton reflet ne te suit pas...",
-      "choices": [
-        { "text": "Toucher le miroir", "next_chapter": 10 },
-        { "text": "Reculer lentement", "next_chapter": 7 }
-      ]
-    },
-    {
-      "chapter_number": 9,
-      "content": "Le livre t'absorbe. Des mots brillent : « Bienvenue, Echo. »",
+      "chapter_number": 32,
+      "content": "Tu entres dans une pièce rustique. Une table de bois, quelques outils simples, une lanterne qui vacille. Au sol, un coffre de chêne fermé par une corde nouée avec soin.",
+      "image": "/images/chapters/farmer-chest.png",
+      "is_chest_room": true,
+      "is_ending": true,
       "choices": []
     },
     {
-      "chapter_number": 10,
-      "content": "Tu passes à travers le miroir. Une autre version de toi t’attend...",
+      "chapter_number": 33,
+      "content": "Un escalier de pierre t’amène dans une serre souterraine baignée d’une lumière verdâtre. Des papillons lumineux virevoltent autour d’un coffre couvert de mousse.",
+      "image": "/images/chapters/fairy-chest.png",
+      "is_chest_room": true,
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "chapter_number": 34,
+      "content": "Une salle circulaire t'accueille avec un silence solennel. Au centre, un trône vide. Devant lui, un coffre au bois noble orné d’un blason inconnu.",
+      "image": "/images/chapters/queen-chest.png",
+      "is_chest_room": true,
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "chapter_number": 35,
+      "content": "Tu marches sur un tapis ancien menant à un autel. Un coffre y repose, flanqué de deux boucliers. Il brille d’un éclat de justice et de promesse.",
+      "image": "/images/chapters/knight-chest.png",
+      "is_chest_room": true,
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "chapter_number": 36,
+      "content": "Le coffre d’écailles s’ouvre dans un grondement sourd. Une lumière rougeoyante t’enveloppe.",
+      "image": "/images/chapters/persona-dragon.png",
+      "is_ending": true,
+      "choices": []
+    },
+    {
+      "chapter_number": 37,
+      "content": "Le coffre de bois s’ouvre avec un grincement familier. À l’intérieur, des outils usés mais fiables, et un médaillon gravé.",
+      "image": "/images/chapters/persona-peasant.png",
+      "is_ending": true,
       "choices": []
     }
   ]

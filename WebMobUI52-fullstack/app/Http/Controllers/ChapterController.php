@@ -37,6 +37,7 @@ class ChapterController extends Controller
             'content' => $chapter->content,
             'image' => $chapter->image,
             'is_ending' => $chapter->is_ending,
+            'is_chest_room' => $chapter->is_chest_room,
             'choices' => $chapter->choices->map(fn($choice) => [
                 'id' => $choice->id,
                 'text' => $choice->text,

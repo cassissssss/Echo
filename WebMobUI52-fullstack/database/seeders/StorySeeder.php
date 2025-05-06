@@ -32,6 +32,7 @@ class StorySeeder extends Seeder
                 'content' => $chapter['content'],
                 'image' => $chapter['image'] ?? null,
                 'is_ending' => $chapter['is_ending'] ?? false,
+                'is_chest_room' => $chapter['is_chest_room'] ?? false
             ]);
 
             $chapterIdMap[$chapter['chapter_number']] = $newChapter->id;
@@ -45,6 +46,7 @@ class StorySeeder extends Seeder
                     'chapter_id' => $currentChapterId,
                     'text' => $choice['text'],
                     'next_chapter_id' => $chapterIdMap[$choice['next_chapter']],
+                    'traits' => $choice['traits'] ?? null,
                 ]);
             }
         }
