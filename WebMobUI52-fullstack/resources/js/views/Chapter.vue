@@ -29,7 +29,11 @@
 
         <div v-else class="play-wrapper">
           <button class="torch-button" @click="continueStory" aria-label="Continuer">
-            <img src="/images/icons/torch.png" alt="Continuer" class="torch-icon" />
+            <img
+  :src="data?.is_chest_room ? '/images/icons/chest.png' : '/images/icons/torch.png'"
+  :alt="data?.is_chest_room ? 'Ouvrir le coffre' : 'Continuer'"
+  class="torch-icon"
+/>
           </button>
         </div>
       </div>
@@ -100,16 +104,9 @@ async function fetchChapter() {
     data.value = d.value
     error.value = e.value
     showContent.value = true
-
-    // Redirection automatique si chest room
-    const isChestRoom = d.value?.is_chest_room
-    if (isChestRoom) {
-      const persona = getFinalPersonality()
-      const target = endings[persona] || 30
-      router.push(`/story/${storyId}/chapter/${target}`)
-    }
   }, 300)
 }
+
 
 fetchChapter()
 watch(() => route.params.chapterId, fetchChapter)
