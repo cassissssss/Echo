@@ -69,17 +69,6 @@ const error = ref(null)
 const showContent = ref(false)
 const showEndingModal = ref(false)
 
-const endings = {
-  sorciere: 25,
-  guerriere: 26,
-  fee: 27,
-  reine: 28,
-  chevalier: 29,
-  barde: 30,
-  dragon: 36,
-  paysan: 37
-}
-
 function normalizePersona(str) {
   return str
     .normalize("NFD") 
@@ -141,6 +130,30 @@ function continueStory() {
 function restartStory() {
   router.push(`/story/${route.params.storyId}`)
 }
+
+import { onMounted } from 'vue'
+
+function logTraits() {
+  const cookie = document.cookie.split('; ').find(c => c.startsWith('echo_traits='))
+  if (cookie) {
+    const traits = JSON.parse(decodeURIComponent(cookie.split('=')[1]))
+    console.log('Traits actuels du joueur :')
+    console.table(traits)
+  } else {
+    console.info('Aucun cookie trouvé. Le joueur commence une nouvelle session.');
+  }
+}
+
+onMounted(() => {
+  fetchChapter()
+  logTraits()
+})
+
+watch(() => route.params.chapterId, () => {
+  fetchChapter()
+  logTraits()
+})
+
 </script>
 
 <style scoped>

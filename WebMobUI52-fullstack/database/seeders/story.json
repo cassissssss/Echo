@@ -69,7 +69,7 @@
 },
 {
   "chapter_number": 6,
-  "content": "En inspectant les livres, tu trouves un interrupteur. Une lumière rouge s’allume dans un coin du plafond. Une voix métallique résonne : « Code requis pour déverrouiller l'accès. »",
+  "content": "En inspectant des livres, tu trouves un interrupteur. Une lumière rouge s’allume dans un coin du plafond. Une voix métallique résonne : « Code requis pour déverrouiller l'accès. »",
   "image": "/images/chapters/redlight.png",
   "choices": [
     {
@@ -210,7 +210,7 @@
 },
 {
   "chapter_number": 14,
-  "content": "Tu brises le miroir. Derrière, un œil peint t’observe. En le touchant, un souffle glacial t’envahit et une trappe s’ouvre à tes pieds.",
+  "content": "Derrière le mirroir brisé, un œil peint t’observe. En le touchant, un souffle glacial t’envahit et une trappe s’ouvre à tes pieds.",
   "image": "/images/chapters/broken-mirror.png",
   "choices": [
     {
@@ -283,7 +283,7 @@
   "choices": [
     {
       "text": "Descendre",
-      "next_chapter": 26,
+      "next_chapter": 35,
       "traits": ["bravoure", "curiosité"]
     },
     {
@@ -300,7 +300,7 @@
   "choices": [
     {
       "text": "Suivre la musique",
-      "next_chapter": 28,
+      "next_chapter": 33,
       "traits": ["émotion", "intuition"]
     },
     {
@@ -346,7 +346,7 @@
 },
 {
   "chapter_number": 22,
-  "content": "Tu arrives dans une salle voûtée. En son centre : un coffre ancien, scellé par des runes. Une inscription apparaît lentement : « Celui ou celle que tu es te guidera à l’intérieur. »",
+  "content": "Une salle voûtée s’ouvre devant toi. L’air y est dense, figé. En son centre, un coffre de pierre repose sur un piédestal, comme en attente. Une inscription semble t’observer : ‘Celui ou celle que tu es sera révélé.’",
   "image": "/images/chapters/chest-room.png",
   "is_chest_room": true,
   "is_ending": true,
@@ -354,7 +354,7 @@
 },
 {
   "chapter_number": 23,
-  "content": "Une bibliothèque circulaire. Au milieu : un pupitre avec un coffre fermé. Une lumière pulsante s’en échappe, accompagnée d’un souffle gelé.",
+  "content": "Le silence t’enveloppe alors que tu pénètres dans une pièce circulaire. Un léger souffle traverse la pièce, agitant un voile suspendu devant un coffre scellé. Il semble reconnaître ta présence, comme si tu étais...",
   "image": "/images/chapters/library-chest.png",
   "is_chest_room": true,
   "is_ending": true,
@@ -362,23 +362,23 @@
 },
 {
   "chapter_number": 24,
-  "content": "Tu arrives dans une pièce tapissée de miroirs. Dans l’un d’eux, ton reflet te sourit… mais n’imite pas tes gestes. Devant toi : un coffre d’ébène.",
-  "image": "/images/chapters/mirror-chest.png",
+  "content": "Devant toi, une salle entièrement blanche, vide et paisible. Au milieu, posé au sol, un coffre sans serrure. Tu sens une étrange sérénité t’envahir, comme si tu étais attendu ici depuis longtemps.",
+  "image": "/images/chapters/white-room.png",
   "is_chest_room": true,
   "is_ending": true,
   "choices": []
 },
 {
   "chapter_number": 25,
-  "content": "Tu ouvres le coffre. Une lumière verte s’échappe et enveloppe la pièce. À l’intérieur, un miroir brisé : tu vois une silhouette encapuchonnée.",
-  "image": "/images/chapters/persona-witch.png",
+  "content": "Tu entres dans une pièce faite de pierre ancienne. Une lumière douce tombe du plafond en cercle autour d’un coffre modeste. Sur ses flancs, des symboles familiers brillent à ton approche, et révèlent qui tu es vraiment...",
+  "image": "/images/chapters/light-chest.png",
   "is_chest_room": true,
   "is_ending": true,
   "choices": []
 },
 {
   "chapter_number": 26,
-  "content": "Un choc de métal. L’armure exposée dans le coffre s’anime et te salue.",
+  "content": "Un choc de métal se fait entendre. En entrant dans la salle, tu apperçois un coffre scintillant contenant une armure. Tout d'un coup elle s’anime et te salue.",
   "image": "/images/chapters/persona-warrior.png",
   "is_chest_room": true,
   "is_ending": true,

@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Hash;
 // Formulaire de connexion (GET /login)
 Route::get('/login', function () {
   $csrf = csrf_token();
+  $errors = session('errors');
+  $errorHtml = '';
+
+  if ($errors && $errors->has('email')) {
+    $errorMessage = $errors->first('email');
+    $errorHtml = "<p style='color: red;'>$errorMessage</p>";
+  }
 
   return <<<HTML
     <!DOCTYPE html>
@@ -19,6 +26,7 @@ Route::get('/login', function () {
     </head>
     <body>
         <h2>Connexion</h2>
+        {$errorHtml}
         <form method="POST" action="/login">
             <input type="hidden" name="_token" value="{$csrf}">
             <label>Email : <input type="email" name="email" /></label><br>
@@ -29,6 +37,7 @@ Route::get('/login', function () {
     </html>
     HTML;
 });
+
 
 // Traitement de la connexion (POST /login)
 Route::post('/login', function (Request $request) {
