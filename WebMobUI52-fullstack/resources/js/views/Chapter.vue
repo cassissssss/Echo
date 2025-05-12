@@ -39,7 +39,6 @@
       </div>
     </transition>
 
-    <!-- Modal de fin -->
     <transition name="fade">
       <div v-if="showEndingModal" class="modal-overlay">
         <div class="modal">
@@ -64,7 +63,6 @@ import { addTrait, getFinalPersonality, resetTraits } from '@/composables/usePer
 const route = useRoute()
 const router = useRouter()
 
-// storyId robuste : fallback à 1 si jamais route.params.storyId est vide
 const storyId = ref(route.params.storyId ?? 1)
 
 const data = ref(null)
@@ -148,10 +146,10 @@ function logTraits() {
 
   if (cookie) {
     const traits = JSON.parse(decodeURIComponent(cookie.split('=')[1]))
-    console.log(`🧠 Traits du joueur au chapitre ${chapterId} :`)
+    console.log(`Traits du joueur au chapitre ${chapterId} :`)
     console.table(traits)
   } else {
-    console.info(`🆕 Aucun cookie trouvé. Nouvelle session au chapitre ${chapterId}.`)
+    console.info(`Aucun cookie trouvé. Nouvelle session au chapitre ${chapterId}.`)
   }
 }
 

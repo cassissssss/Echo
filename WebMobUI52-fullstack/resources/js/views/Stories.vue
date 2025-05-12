@@ -12,6 +12,10 @@ function openStory(story) {
 
 <template>
   <div class="page">
+    <a href="/login" class="login-icon" title="Se connecter">
+  <img src="/images/icons/login-icon.png" alt="Connexion" />
+</a>
+
     <h1 class="title">Choisis ton aventure</h1>
     <div class="stories">
       <div
@@ -19,7 +23,7 @@ function openStory(story) {
         :key="story.id"
         class="story"
         @click="openStory(story)"
-        >
+      >
         <img :src="story.cover" class="cover" />
         <h2>{{ story.title }}</h2>
         <p>{{ story.summary }}</p>
@@ -34,7 +38,25 @@ function openStory(story) {
   color: white;
   padding: 2rem;
   font-family: 'VT323', monospace;
+  position: relative;
 }
+
+/* Icône de connexion */
+.login-icon {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+.login-icon img {
+  width: 32px;
+  height: 32px;
+  transition: opacity 0.3s;
+}
+.login-icon img:hover {
+  opacity: 0.7;
+}
+
 .title {
   font-size: 3rem;
   text-align: center;
