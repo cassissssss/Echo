@@ -20,7 +20,7 @@ class StoryController extends Controller
                 'cover' => $story->cover ?? null,
             ];
         });
-
+        // On renvoie le tout en JSON
         return response()->json($stories);
     }
 
@@ -32,6 +32,7 @@ class StoryController extends Controller
 
     public function createStory(StoreStoryRequest $request): JsonResponse
     {
+        // Crée une nouvelle histoire avec les données validées
         $story = Story::create($request->validated());
         return response()->json($story, 201);
     }
