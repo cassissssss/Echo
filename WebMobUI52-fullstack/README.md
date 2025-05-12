@@ -14,7 +14,7 @@ Le projet est découpé en deux parties distinctes :
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ### 1. Cloner le dépôt
 
@@ -39,7 +39,7 @@ composer run dev
 L'application est finalement accessible via http://127.0.0.1:8000
 
 Authentification
-Système de connexion via /login)
+Système de connexion via /login ou l'icone profile
 
 Middleware auth protègent /dashboard et les routes API sensibles
 

@@ -8,12 +8,17 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
+    /**
+     * Crée un utilisateur administrateur par défaut si l'email n'existe pas déjà.
+     */
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@echo.ch',
-            'password' => Hash::make('1234'),
-        ]);
+        if (!User::where('email', 'admin@echo.ch')->exists()) {
+            User::create([
+                'name' => 'Admin',
+                'email' => 'admin@echo.ch',
+                'password' => Hash::make('1234'),
+            ]);
+        }
     }
 }

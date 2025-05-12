@@ -1,7 +1,7 @@
 <template>
-    <router-link to="/login" class="login-icon" title="Se connecter">
-      <img src="/images/icons/login-icon.png" alt="Icône de connexion" />
-    </router-link>
+   <a href="/login" class="login-icon" title="Se connecter">
+    <img src="/images/icons/login-icon.png" alt="Icône de connexion" />
+  </a>
   </template>
   
   <script setup>

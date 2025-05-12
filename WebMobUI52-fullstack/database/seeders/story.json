@@ -113,7 +113,7 @@
       "traits": ["curiosité", "mystère"]
     },
     {
-      "text": "Le refermer avec calme",
+      "text": "Tu le laisses et te retournes calmement pour explorer la pièce",
       "next_chapter_id": 6,
       "traits": ["prudence", "maîtrise_de_soi"]
     }
@@ -403,7 +403,7 @@
 },
 {
   "chapter_number": 29,
-  "content": "Une épée attend dans le coffre. Tu la reconnais sans l’avoir vue avant.",
+  "content": "Une épée attend dans un coffre. Tu la reconnais sans l’avoir vue avant.",
   "image": "/images/chapters/persona-knight.png",
   "is_chest_room": true,
   "is_ending": true,
@@ -411,7 +411,7 @@
 },
 {
   "chapter_number": 30,
-  "content": "Un luth miniature repose dans la boîte. En le touchant, tu entends une vieille chanson que seul toi connais.",
+  "content": "Un luth miniature repose dans une boîte. En le touchant, tu entends une vieille chanson que seul toi connais.",
   "image": "/images/chapters/persona-bard.png",
   "is_chest_room": true,
   "is_ending": true,

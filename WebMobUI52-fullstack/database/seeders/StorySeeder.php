@@ -12,9 +12,18 @@ class StorySeeder extends Seeder
 {
     public function run(): void
     {
+        /**
+         * Charge une histoire complète à partir d'un fichier JSON, uniquement si elle n'existe pas déjà.
+         */
         $json = File::get(database_path('seeders/story.json'));
         $storyData = json_decode($json, true);
 
+        // Vérifie si une histoire avec ce titre existe déjà
+        if (Story::where('title', $storyData['title'])->exists()) {
+            return; // Stoppe l'exécution du seeder si l’histoire est déjà en base
+        }
+
+        // Création de l'histoire principale
         $story = Story::create([
             'title' => $storyData['title'],
             'summary' => $storyData['summary'],
@@ -22,9 +31,9 @@ class StorySeeder extends Seeder
             'cover' => $storyData['cover'] ?? null,
         ]);
 
-
         $chapterIdMap = [];
 
+        // Création des chapitres
         foreach ($storyData['chapters'] as $chapter) {
             $newChapter = Chapter::create([
                 'story_id' => $story->id,
@@ -38,6 +47,7 @@ class StorySeeder extends Seeder
             $chapterIdMap[$chapter['chapter_number']] = $newChapter->id;
         }
 
+        // Création des choix pour chaque chapitre
         foreach ($storyData['chapters'] as $chapter) {
             $currentChapterId = $chapterIdMap[$chapter['chapter_number']];
 
