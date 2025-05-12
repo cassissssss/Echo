@@ -4,13 +4,13 @@
 
     <transition name="fade" mode="out-in">
       <div v-if="showContent" key="chapter-content" class="content">
-        <div v-if="data.image ?? data.chapter?.image" class="image-container">
-          <img
-            :src="data.image ?? data.chapter.image"
-            alt="Illustration du chapitre"
-            class="scene-image"
-          />
-        </div>
+        <div v-if="data?.image || data?.chapter?.image" class="image-container">
+  <img
+    :src="data?.image || data?.chapter?.image"
+    alt="Illustration du chapitre"
+    class="scene-image"
+  />
+</div>
 
         <div class="chapter-text">
           <p>{{ data.content ?? data.chapter?.content ?? 'Contenu indisponible.' }}</p>
@@ -21,7 +21,7 @@
             v-for="choice in data.choices ?? data.chapter.choices"
             :key="choice.id"
             class="choice-link"
-            @click="goToChapter(choice.next_chapter_id, choice.traits)"
+            @click="goToChapter(choice.next_chapter_id, choice.traits ?? [])"
           >
             {{ choice.text }}
           </div>
@@ -56,13 +56,16 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useFetchJson } from '@/composables/useFetchJson'
-import { addTrait, getFinalPersonality } from '@/composables/usePersonalityTracker'
+import { addTrait, getFinalPersonality, resetTraits } from '@/composables/usePersonalityTracker'
 
 const route = useRoute()
 const router = useRouter()
+
+// storyId robuste : fallback à 1 si jamais route.params.storyId est vide
+const storyId = ref(route.params.storyId ?? 1)
 
 const data = ref(null)
 const error = ref(null)
@@ -80,12 +83,11 @@ async function fetchChapter() {
   showContent.value = false
   showEndingModal.value = false
 
-  const storyId = route.params.storyId
   const chapterId = route.params.chapterId
 
   const endpoint = chapterId
     ? `/chapters/${chapterId}`
-    : `/stories/${storyId}/first-chapter`
+    : `/story/${storyId.value}/first-chapter`
 
   const { data: d, error: e } = useFetchJson(endpoint)
 
@@ -96,15 +98,22 @@ async function fetchChapter() {
   }, 300)
 }
 
-
-fetchChapter()
-watch(() => route.params.chapterId, fetchChapter)
-
 function goToChapter(nextId, traits) {
-  if (traits && traits.length > 0) {
-    traits.forEach(trait => addTrait(trait))
+  const traitsArray =
+    typeof traits === 'string'
+      ? traits.split(',').map(t => t.trim())
+      : Array.isArray(traits)
+      ? traits
+      : []
+
+  if (traitsArray.length > 0) {
+    traitsArray.forEach(trait => addTrait(trait))
+    logTraits()
   }
-  router.push(`/story/${route.params.storyId}/chapter/${nextId}`)
+
+  setTimeout(() => {
+    router.push(`/story/${storyId.value}/chapter/${nextId}`)
+  }, 100)
 }
 
 function continueStory() {
@@ -115,7 +124,7 @@ function continueStory() {
     if (data.value?.is_chest_room) {
       const persona = getFinalPersonality()
       const slug = normalizePersona(persona)
-      router.push(`/story/${route.params.storyId}/ending/${slug}`)
+      router.push(`/story/${storyId.value}/ending/${slug}`)
     } else {
       showEndingModal.value = true
     }
@@ -123,37 +132,36 @@ function continueStory() {
     const chapterIdParam = route.params.chapterId
     const currentChapterId = chapterIdParam ? parseInt(chapterIdParam) : 1
     const nextChapterId = currentChapterId + 1
-    router.push(`/story/${route.params.storyId}/chapter/${nextChapterId}`)
+    router.push(`/story/${storyId.value}/chapter/${nextChapterId}`)
   }
 }
 
 function restartStory() {
-  router.push(`/story/${route.params.storyId}`)
+  console.log('Restarting story')
+  resetTraits()
+  router.push(`/story/${storyId.value}/chapter/1`)
 }
-
-import { onMounted } from 'vue'
 
 function logTraits() {
   const cookie = document.cookie.split('; ').find(c => c.startsWith('echo_traits='))
+  const chapterId = route.params.chapterId || 'début'
+
   if (cookie) {
     const traits = JSON.parse(decodeURIComponent(cookie.split('=')[1]))
-    console.log('Traits actuels du joueur :')
+    console.log(`🧠 Traits du joueur au chapitre ${chapterId} :`)
     console.table(traits)
   } else {
-    console.info('Aucun cookie trouvé. Le joueur commence une nouvelle session.');
+    console.info(`🆕 Aucun cookie trouvé. Nouvelle session au chapitre ${chapterId}.`)
   }
 }
 
 onMounted(() => {
   fetchChapter()
-  logTraits()
 })
 
-watch(() => route.params.chapterId, () => {
-  fetchChapter()
-  logTraits()
+watch(() => route.params.chapterId, async () => {
+  await fetchChapter()
 })
-
 </script>
 
 <style scoped>

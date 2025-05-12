@@ -30,7 +30,6 @@ class ChapterController extends Controller
         if (!$chapter) {
             return response()->json(['message' => 'Chapitre introuvable.'], 404);
         }
-
         return response()->json([
             'id' => $chapter->id,
             'chapter_number' => $chapter->chapter_number,
@@ -42,6 +41,7 @@ class ChapterController extends Controller
                 'id' => $choice->id,
                 'text' => $choice->text,
                 'next_chapter_id' => $choice->next_chapter_id,
+                'traits' => $choice->traits ?? []
             ])
         ]);
     }

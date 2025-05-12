@@ -10,7 +10,7 @@ Route::prefix('v1')->group(function () {
     // Routes publiques
     Route::get('/stories', [StoryController::class, 'getStories']);
     Route::get('/stories/{id}', [StoryController::class, 'getStory']);
-    Route::get('/stories/{story}/first-chapter', [StoryController::class, 'getFirstChapter']);
+    Route::get('/story/{story}/first-chapter', [StoryController::class, 'getFirstChapter']);
     Route::get('/chapters', [ChapterController::class, 'getChapters']);
     Route::get('/chapters/{id}', [ChapterController::class, 'getChapter']);
     Route::get('/choices', [ChoiceController::class, 'getChoices']);

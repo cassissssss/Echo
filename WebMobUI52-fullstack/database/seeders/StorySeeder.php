@@ -45,7 +45,7 @@ class StorySeeder extends Seeder
                 Choice::create([
                     'chapter_id' => $currentChapterId,
                     'text' => $choice['text'],
-                    'next_chapter_id' => $chapterIdMap[$choice['next_chapter']],
+                    'next_chapter_id' => $chapterIdMap[$choice['next_chapter_id']] ?? null,
                     'traits' => $choice['traits'] ?? null,
                 ]);
             }

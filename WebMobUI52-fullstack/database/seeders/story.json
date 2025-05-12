@@ -17,12 +17,13 @@
       "choices": [
         {
           "text": "Rentrer dans le château, car rien ne t'effraie et tu as besoin d'aide...",
-          "next_chapter": 3,
+          "next_chapter_id": 3,
           "traits": ["courage", "curiosité"]
         },
         {
           "text": "Retourner à la voiture : tu n'es pas dans un film d'horreur, où les protagonistes foncent vers le danger !",
-          "next_chapter": 4
+          "next_chapter_id": 4,
+          "traits": []
         }
       ]
     },
@@ -33,12 +34,12 @@
       "choices": [
         {
           "text": "Tu prends ton téléphones et allumes la lampe torche",
-          "next_chapter": 5,
+          "next_chapter_id": 5,
           "traits": ["initiative", "précaution"]
         },
         {
           "text": "Tu touches les murs pour espérer tomber sur un interrupteur",
-          "next_chapter": 6,
+          "next_chapter_id": 6,
           "traits": ["observation", "calme"]
         }
       ]
@@ -57,12 +58,12 @@
   "choices": [
     {
       "text": "Suivre la silhouette en silence",
-      "next_chapter": 7,
+      "next_chapter_id": 7,
       "traits": ["curiosité", "discrétion"]
     },
     {
       "text": "Ignorer et inspecter les livres",
-      "next_chapter": 8,
+      "next_chapter_id": 8,
       "traits": ["émerveillement", "calme"]
     }
   ]
@@ -74,12 +75,12 @@
   "choices": [
     {
       "text": "Chercher un indice dans la pièce",
-      "next_chapter": 9,
+      "next_chapter_id": 9,
       "traits": ["observation", "intuition"]
     },
     {
       "text": "Forcer la porte verrouillée à côté",
-      "next_chapter": 10,
+      "next_chapter_id": 10,
       "traits": ["impulsivité", "puissance"]
     }
   ]
@@ -91,12 +92,12 @@
   "choices": [
     {
       "text": "Descendre l’escalier",
-      "next_chapter": 11,
+      "next_chapter_id": 11,
       "traits": ["courage", "prise_de_risque"]
     },
     {
       "text": "Faire demi-tour",
-      "next_chapter": 8,
+      "next_chapter_id": 8,
       "traits": ["prudence"]
     }
   ]
@@ -108,12 +109,12 @@
   "choices": [
     {
       "text": "Ouvrir le livre",
-      "next_chapter": 12,
+      "next_chapter_id": 12,
       "traits": ["curiosité", "mystère"]
     },
     {
       "text": "Le refermer avec calme",
-      "next_chapter": 6,
+      "next_chapter_id": 6,
       "traits": ["prudence", "maîtrise_de_soi"]
     }
   ]
@@ -125,12 +126,12 @@
   "choices": [
     {
       "text": "Ouvrir la trappe lentement",
-      "next_chapter": 13,
+      "next_chapter_id": 13,
       "traits": ["prudence", "observation"]
     },
     {
       "text": "Briser le miroir, par instinct",
-      "next_chapter": 14,
+      "next_chapter_id": 14,
       "traits": ["impulsivité", "mystère"]
     }
   ]
@@ -142,12 +143,12 @@
   "choices": [
     {
       "text": "Tu touches la statue",
-      "next_chapter": 15,
+      "next_chapter_id": 15,
       "traits": ["prise_de_risque", "courage"]
     },
     {
       "text": "Tu lui parles comme si elle allait te répondre",
-      "next_chapter": 16,
+      "next_chapter_id": 16,
       "traits": ["créativité", "intuition"]
     }
   ]
@@ -159,17 +160,17 @@
   "choices": [
     {
       "text": "Appuyer sur la clé",
-      "next_chapter": 17,
+      "next_chapter_id": 17,
       "traits": ["logique", "curiosité"]
     },
     {
       "text": "Appuyer sur la flamme",
-      "next_chapter": 18,
+      "next_chapter_id": 18,
       "traits": ["audace", "instinct"]
     },
     {
       "text": "Appuyer sur la goutte",
-      "next_chapter": 19,
+      "next_chapter_id": 19,
       "traits": ["calme", "émotion"]
     }
   ]
@@ -181,12 +182,12 @@
   "choices": [
     {
       "text": "Tu avances sans te retourner",
-      "next_chapter": 20,
+      "next_chapter_id": 20,
       "traits": ["volonté", "mystère"]
     },
     {
       "text": "Tu appelles à voix haute",
-      "next_chapter": 21,
+      "next_chapter_id": 21,
       "traits": ["humour", "imprudence"]
     }
   ]
@@ -198,12 +199,12 @@
   "choices": [
     {
       "text": "Avancer sans la torche",
-      "next_chapter": 22,
+      "next_chapter_id": 22,
       "traits": ["intuition", "courage"]
     },
     {
       "text": "Prendre la torche et suivre les symboles",
-      "next_chapter": 23,
+      "next_chapter_id": 23,
       "traits": ["précaution", "logique"]
     }
   ]
@@ -215,12 +216,12 @@
   "choices": [
     {
       "text": "Sauter dans la trappe",
-      "next_chapter": 24,
+      "next_chapter_id": 24,
       "traits": ["prise_de_risque", "mystère"]
     },
     {
       "text": "Chercher un autre passage",
-      "next_chapter": 25,
+      "next_chapter_id": 25,
       "traits": ["observation", "prudence"]
     }
   ]
@@ -232,12 +233,12 @@
   "choices": [
     {
       "text": "Entrer dans le passage",
-      "next_chapter": 26,
+      "next_chapter_id": 26,
       "traits": ["audace", "mystère"]
     },
     {
       "text": "Rester et interroger la statue",
-      "next_chapter": 27,
+      "next_chapter_id": 27,
       "traits": ["curiosité", "observation"]
     }
   ]
@@ -249,12 +250,12 @@
   "choices": [
     {
       "text": "Surpris mais calme tu descends dans la pièce",
-      "next_chapter": 28,
+      "next_chapter_id": 28,
       "traits": ["créativité", "audace"]
     },
     {
       "text": "Tu rebrousses chemin prudemment, cette statue est bien trop étrange",
-      "next_chapter": 25,
+      "next_chapter_id": 25,
       "traits": ["prudence", "réflexion"]
     }
   ]
@@ -266,12 +267,12 @@
   "choices": [
     {
       "text": "Entrer directement",
-      "next_chapter": 22,
+      "next_chapter_id": 22,
       "traits": ["structure", "décision"]
     },
     {
       "text": "Observer la porte d’abord",
-      "next_chapter": 25,
+      "next_chapter_id": 25,
       "traits": ["analyse", "calme"]
     }
   ]
@@ -283,12 +284,12 @@
   "choices": [
     {
       "text": "Descendre",
-      "next_chapter": 35,
+      "next_chapter_id": 35,
       "traits": ["bravoure", "curiosité"]
     },
     {
       "text": "Chercher un levier caché",
-      "next_chapter": 27,
+      "next_chapter_id": 27,
       "traits": ["logique", "prudence"]
     }
   ]
@@ -300,12 +301,12 @@
   "choices": [
     {
       "text": "Suivre la musique",
-      "next_chapter": 33,
+      "next_chapter_id": 33,
       "traits": ["émotion", "intuition"]
     },
     {
       "text": "Se boucher les oreilles et courir ; tu n’aimes pas l’eau",
-      "next_chapter": 24,
+      "next_chapter_id": 24,
       "traits": ["instinct", "méfiance"]
     }
   ]
@@ -317,12 +318,12 @@
   "choices": [
     {
       "text": "Tu suis ton reflet",
-      "next_chapter": 29,
+      "next_chapter_id": 29,
       "traits": ["mystère", "doute"]
     },
     {
       "text": "Tu fermes les yeux et marches au hasard",
-      "next_chapter": 30,
+      "next_chapter_id": 30,
       "traits": ["foi", "instinct"]
     }
   ]
@@ -334,12 +335,12 @@
   "choices": [
     {
       "text": "Tu cherches la source de la voix",
-      "next_chapter": 30,
+      "next_chapter_id": 30,
       "traits": ["courage", "curiosité"]
     },
     {
       "text": "Tu te taits et écoute la voix mystérieuse",
-      "next_chapter": 29,
+      "next_chapter_id": 29,
       "traits": ["méfiance", "analyse"]
     }
   ]
