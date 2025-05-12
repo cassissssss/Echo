@@ -19,12 +19,15 @@ Le projet est découpé en deux parties distinctes :
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/votre-utilisateur/echo.git
+git clone https://github.com/cassissssss/echo.git
 cd echo
 2. Installer le backend Laravel
 cd WebMobUI52-fullstack
 composer install
-cp .env.example .env
+npm install
+npm run build
+Créer un fichier .env si non existant :
+    cp .env.example .env
 php artisan key:generate
 php artisan migrate --seed
 php artisan serve
