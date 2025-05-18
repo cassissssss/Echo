@@ -1,21 +1,66 @@
+<script setup>
+// Vue Router : accéder aux paramètres de l’URL (storyId, chapterId)
+import { onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+// Icône de connexion fixe en haut à droite
+import LoginIcon from '@/components/LoginIcon.vue'
+
+// Composable contenant toute la logique métier du chapitre (récupération, navigation, redirections, etc.)
+import { useChapterLogic } from '@/composables/useChapterLogic'
+
+const route = useRoute()
+
+// Variables et fonctions fournies par le composable
+const {
+  data,              
+  error,             
+  showContent,       
+  showEndingModal,   
+  fetchChapter,      
+  goToChapter,       
+  continueStory,     
+  restartStory       
+} = useChapterLogic()
+
+// Chargement initial au montage du composant
+onMounted(() => {
+  fetchChapter()
+})
+
+// Recharge le chapitre si le paramètre d’URL change
+watch(() => route.params.chapterId, () => {
+  fetchChapter()
+})
+</script>
+
 <template>
   <div class="page">
+    <!-- Icône de connexion en haut à droite -->
+    <LoginIcon />
+
+    <!-- Affichage d'une erreur si le chapitre est invalide ou non disponible -->
     <div v-if="error" class="info error">Erreur : {{ error.statusText }}</div>
 
+    <!-- Transition d'apparition du contenu du chapitre -->
     <transition name="fade" mode="out-in">
       <div v-if="showContent" key="chapter-content" class="content">
+        
+        <!-- Affichage de l’image du chapitre, si présente -->
         <div v-if="data?.image || data?.chapter?.image" class="image-container">
-  <img
-    :src="data?.image || data?.chapter?.image"
-    alt="Illustration du chapitre"
-    class="scene-image"
-  />
-</div>
+          <img
+            :src="data?.image || data?.chapter?.image"
+            alt="Illustration du chapitre"
+            class="scene-image"
+          />
+        </div>
 
+        <!-- Texte principal du chapitre -->
         <div class="chapter-text">
           <p>{{ data.content ?? data.chapter?.content ?? 'Contenu indisponible.' }}</p>
         </div>
 
+        <!-- Affichage des choix du joueur (si disponibles) -->
         <div v-if="(data.choices ?? data.chapter?.choices)?.length" class="choices">
           <div
             v-for="choice in data.choices ?? data.chapter.choices"
@@ -27,18 +72,20 @@
           </div>
         </div>
 
+        <!-- Si aucun choix disponible : bouton torche ou coffre -->
         <div v-else class="play-wrapper">
           <button class="torch-button" @click="continueStory" aria-label="Continuer">
             <img
-  :src="data?.is_chest_room ? '/images/icons/chest.png' : '/images/icons/torch.png'"
-  :alt="data?.is_chest_room ? 'Ouvrir le coffre' : 'Continuer'"
-  class="torch-icon"
-/>
+              :src="data?.is_chest_room ? '/images/icons/chest.png' : '/images/icons/torch.png'"
+              :alt="data?.is_chest_room ? 'Ouvrir le coffre' : 'Continuer'"
+              class="torch-icon"
+            />
           </button>
         </div>
       </div>
     </transition>
 
+    <!-- Modal de fin d’histoire (si ce n’est pas une salle de coffre) -->
     <transition name="fade">
       <div v-if="showEndingModal" class="modal-overlay">
         <div class="modal">
@@ -53,114 +100,6 @@
     </transition>
   </div>
 </template>
-
-<script setup>
-import { ref, watch, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useFetchJson } from '@/composables/useFetchJson'
-import { addTrait, getFinalPersonality, resetTraits } from '@/composables/usePersonalityTracker'
-
-const route = useRoute()
-const router = useRouter()
-
-const storyId = ref(route.params.storyId ?? 1)
-
-const data = ref(null)
-const error = ref(null)
-const showContent = ref(false)
-const showEndingModal = ref(false)
-
-function normalizePersona(str) {
-  return str
-    .normalize("NFD") 
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-}
-
-async function fetchChapter() {
-  showContent.value = false
-  showEndingModal.value = false
-
-  const chapterId = route.params.chapterId
-
-  const endpoint = chapterId
-    ? `/chapters/${chapterId}`
-    : `/story/${storyId.value}/first-chapter`
-
-  const { data: d, error: e } = useFetchJson(endpoint)
-
-  setTimeout(() => {
-    data.value = d.value
-    error.value = e.value
-    showContent.value = true
-  }, 300)
-}
-
-function goToChapter(nextId, traits) {
-  const traitsArray =
-    typeof traits === 'string'
-      ? traits.split(',').map(t => t.trim())
-      : Array.isArray(traits)
-      ? traits
-      : []
-
-  if (traitsArray.length > 0) {
-    traitsArray.forEach(trait => addTrait(trait))
-    logTraits()
-  }
-
-  setTimeout(() => {
-    router.push(`/story/${storyId.value}/chapter/${nextId}`)
-  }, 100)
-}
-
-function continueStory() {
-  const isEnding = data.value?.is_ending
-  const hasChoices = data.value?.choices?.length > 0
-
-  if (isEnding && !hasChoices) {
-    if (data.value?.is_chest_room) {
-      const persona = getFinalPersonality()
-      const slug = normalizePersona(persona)
-      router.push(`/story/${storyId.value}/ending/${slug}`)
-    } else {
-      showEndingModal.value = true
-    }
-  } else {
-    const chapterIdParam = route.params.chapterId
-    const currentChapterId = chapterIdParam ? parseInt(chapterIdParam) : 1
-    const nextChapterId = currentChapterId + 1
-    router.push(`/story/${storyId.value}/chapter/${nextChapterId}`)
-  }
-}
-
-function restartStory() {
-  console.log('Restarting story')
-  resetTraits()
-  router.push(`/story/${storyId.value}/chapter/1`)
-}
-
-function logTraits() {
-  const cookie = document.cookie.split('; ').find(c => c.startsWith('echo_traits='))
-  const chapterId = route.params.chapterId || 'début'
-
-  if (cookie) {
-    const traits = JSON.parse(decodeURIComponent(cookie.split('=')[1]))
-    console.log(`Traits du joueur au chapitre ${chapterId} :`)
-    console.table(traits)
-  } else {
-    console.info(`Aucun cookie trouvé. Nouvelle session au chapitre ${chapterId}.`)
-  }
-}
-
-onMounted(() => {
-  fetchChapter()
-})
-
-watch(() => route.params.chapterId, async () => {
-  await fetchChapter()
-})
-</script>
 
 <style scoped>
 .page {

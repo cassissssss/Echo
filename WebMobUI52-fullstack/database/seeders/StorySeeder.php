@@ -31,6 +31,7 @@ class StorySeeder extends Seeder
             'cover' => $storyData['cover'] ?? null,
         ]);
 
+        // permet de relier les "chapter_number" du JSON aux IDs de la db
         $chapterIdMap = [];
 
         // Création des chapitres

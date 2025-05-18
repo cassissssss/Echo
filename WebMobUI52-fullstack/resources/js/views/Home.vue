@@ -1,11 +1,16 @@
 <template>
+  <!-- Conteneur central avec design immersif -->
   <div class="intro-container">
-    <a href="/login" class="login-icon" title="Se connecter">
-  <img src="/images/icons/login-icon.png" alt="Connexion" />
-</a>
+    <!-- Icône de connexion placée en haut à droite -->
+    <LoginIcon />
 
+    <!-- Titre d’accueil de l’application -->
     <h1 class="title">Bienvenue sur Echo</h1>
-    <p class="subtitle">Un lieu ou vous suivez vos propres histoires...</p>
+
+    <!-- Sous-titre poétique pour donner le ton -->
+    <p class="subtitle">Un lieu où vous suivez vos propres histoires...</p>
+
+    <!-- Bouton pour commencer l’aventure → redirige vers /stories -->
     <router-link to="/stories" class="start-button">
       ➤ Commencer l’aventure
     </router-link>
@@ -13,6 +18,8 @@
 </template>
 
 <script setup>
+// Composant pour l’icône de connexion (placée en haut à droite de toutes les vues)
+import LoginIcon from '@/components/LoginIcon.vue'
 </script>
 
 <style scoped>
@@ -34,31 +41,15 @@
   position: relative;
 }
 
-/* Icône de connexion */
-.login-icon {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
-}
-.login-icon img {
-  width: 32px;
-  height: 32px;
-  transition: opacity 0.3s;
-}
-.login-icon img:hover {
-  opacity: 0.7;
-}
-
 .title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   letter-spacing: 2px;
 }
 
 .subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 3rem;
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 
 .start-button {
@@ -68,10 +59,25 @@
   border-radius: 5px;
   color: #ffffff;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
 }
 
 .start-button:hover {
   background-color: #ffffff22;
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .start-button {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
 }
 </style>

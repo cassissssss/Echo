@@ -1,10 +1,13 @@
 <script setup>
+
 import { useFetchJson } from '@/composables/useFetchJson'
 import { useRouter } from 'vue-router'
-
+import LoginIcon from '@/components/LoginIcon.vue'
 const { data: stories, error, loading } = useFetchJson('/stories')
+
 const router = useRouter()
 
+// Redirige l'utilisateur vers le premier chapitre d'une histoire
 function openStory(story) {
   router.push(`/story/${story.id}`)
 }
@@ -12,19 +15,30 @@ function openStory(story) {
 
 <template>
   <div class="page">
-    <a href="/login" class="login-icon" title="Se connecter">
-  <img src="/images/icons/login-icon.png" alt="Connexion" />
-</a>
+    <!-- Icône de connexion -->
+    <LoginIcon />
 
+    <!-- Titre principal -->
     <h1 class="title">Choisis ton aventure</h1>
-    <div class="stories">
+
+    <!-- Affichage en cas de chargement -->
+    <div v-if="loading" class="status">Chargement...</div>
+
+    <!-- Affichage en cas d’erreur -->
+    <div v-if="error" class="status error">Erreur : {{ error.statusText }}</div>
+
+    <!-- Grille des histoires récupérées depuis l'API -->
+    <div v-if="stories?.length" class="stories">
       <div
         v-for="story in stories"
         :key="story.id"
         class="story"
         @click="openStory(story)"
       >
-        <img :src="story.cover" class="cover" />
+        <!-- Illustration de l'histoire, avec fallback par défaut -->
+        <img :src="story.cover || '/images/default-cover.jpg'" alt="" class="cover" />
+
+        <!-- Titre et résumé de l’histoire -->
         <h2>{{ story.title }}</h2>
         <p>{{ story.summary }}</p>
       </div>
@@ -39,22 +53,7 @@ function openStory(story) {
   padding: 2rem;
   font-family: 'VT323', monospace;
   position: relative;
-}
-
-/* Icône de connexion */
-.login-icon {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
-}
-.login-icon img {
-  width: 32px;
-  height: 32px;
-  transition: opacity 0.3s;
-}
-.login-icon img:hover {
-  opacity: 0.7;
+  min-height: 100vh;
 }
 
 .title {
@@ -62,27 +61,44 @@ function openStory(story) {
   text-align: center;
   margin-bottom: 2rem;
 }
+
+.status {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+.status.error {
+  color: #ff6b6b;
+}
+
 .stories {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
 }
+
 .story {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1rem;
   border-radius: 10px;
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   cursor: pointer;
   transition: transform 0.3s;
+  text-align: center;
 }
+
 .story:hover {
   transform: scale(1.03);
 }
+
 .cover {
   width: 100%;
   border-radius: 8px;
   margin-bottom: 1rem;
+  object-fit: contain; 
+  max-height: 300px;   
 }
 </style>

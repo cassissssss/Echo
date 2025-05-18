@@ -1,85 +1,57 @@
+<script setup>
+// Vue Router pour récupérer les paramètres de l’URL et rediriger
+import { useRouter, useRoute } from 'vue-router'
+
+// Données centralisées des archétypes finaux (persona)
+import { personaData } from '@/utils/personaData'
+
+const router = useRouter()
+const route = useRoute()
+
+// Extraction du paramètre dynamique depuis l’URL : /story/:id/ending/:persona
+const persona = route.params.persona
+
+// Sécurisation : si l'archétype n'existe pas, rediriger vers la liste des histoires
+if (!personaData[persona]) {
+  router.replace('/stories')
+}
+
+// Récupération des infos liées à l’archétype (ou valeurs par défaut)
+const personaLabel = personaData[persona]?.label ?? 'Inconnu'
+const description = personaData[persona]?.description ?? ''
+const imageUrl = personaData[persona]?.image ?? ''
+const backgroundClass = personaData[persona]?.backgroundClass ?? 'background-default'
+
+// Rejouer = revenir à la liste des histoires
+function restart() {
+  router.push('/stories')
+}
+</script>
+
 <template>
+  <!-- Fond personnalisé selon l'archétype -->
   <div :class="['ending-page', backgroundClass]">
     <div class="ending-container">
-      <img :src="imageUrl" :alt="personaLabel" class="persona-image" />
+      <!-- Image du personnage -->
+      <img
+        :src="imageUrl"
+        :alt="`Portrait du personnage ${personaLabel}`"
+        class="persona-image"
+      />
+
+      <!-- Texte associé à la personnalité finale -->
       <div class="text-section">
-        <h1>Tu es un·e <span class="persona-name">{{ personaLabel }}</span></h1>
+        <h1>
+          Tu es un·e <span class="persona-name">{{ personaLabel }}</span>
+        </h1>
         <p class="description">{{ description }}</p>
+
+        <!-- Bouton pour recommencer une aventure -->
         <button @click="restart" class="restart-button">Rejouer</button>
       </div>
     </div>
   </div>
 </template>
-
-<script setup>
-import { useRouter, useRoute } from 'vue-router'
-
-const router = useRouter()
-const route = useRoute()
-
-const persona = route.params.persona
-
-const personaData = {
-  sorciere: {
-    label: 'Sorcière',
-    image: '/images/personas/sorciere.png',
-    description: 'Gardienne des secrets oubliés, tu navigues dans l’ombre avec sagesse et mystère.',
-    backgroundClass: 'background-sorciere'
-  },
-  guerriere: {
-    label: 'Guerrière',
-    image: '/images/personas/guerriere.png',
-    description: 'Tu affrontes le danger sans détour, protectrice et déterminée.',
-    backgroundClass: 'background-guerriere'
-  },
-  fee: {
-    label: 'Fée',
-    image: '/images/personas/fee.png',
-    description: 'Discrète et lumineuse, tu inspires calme, soin et beauté naturelle.',
-    backgroundClass: 'background-fee'
-  },
-  reine: {
-    label: 'Reine',
-    image: '/images/personas/reine.png',
-    description: 'Stratégique et posée, tu domines avec autorité silencieuse.',
-    backgroundClass: 'background-reine'
-  },
-  chevalier: {
-    label: 'Chevalier',
-    image: '/images/personas/chevalier.png',
-    description: 'Fidèle et brave, tu suis le chemin de l’honneur et de la justice.',
-    backgroundClass: 'background-chevalier'
-  },
-  barde: {
-    label: 'Barde',
-    image: '/images/personas/barde.png',
-    description: 'Créatif et imprévisible, tu insuffles de la joie même dans l’adversité.',
-    backgroundClass: 'background-barde'
-  },
-  dragon: {
-    label: 'Dragon',
-    image: '/images/personas/dragon.png',
-    description: 'Maître de toi-même, mystérieux et puissant, tu impressionnes par ta force contenue.',
-    backgroundClass: 'background-dragon'
-  },
-  paysan: {
-    label: 'Paysan',
-    image: '/images/personas/paysan.png',
-    description: 'Pied sur terre, tu avances avec prudence, logique et bon sens.',
-    backgroundClass: 'background-paysan'
-  }
-}
-
-const personaLabel = personaData[persona]?.label ?? 'Inconnu'
-const description = personaData[persona]?.description ?? ''
-const imageUrl = personaData[persona]?.image ?? ''
-
-const backgroundClass = personaData[persona]?.backgroundClass ?? 'background-default'
-
-function restart() {
-  router.push('/stories')
-}
-</script>
 
 <style scoped>
 .ending-page {

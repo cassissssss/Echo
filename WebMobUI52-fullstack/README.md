@@ -21,23 +21,23 @@ Le projet est découpé en deux parties distinctes :
 ```bash
 git clone https://github.com/cassissssss/echo.git
 cd echo
-2. Installer le backend Laravel
+2. Installer le tout
 cd WebMobUI52-fullstack
 composer install
+
 npm install
+
 npm run build
+
 Créer un fichier .env si non existant :
     cp .env.example .env
-php artisan key:generate
-php artisan migrate --seed
-php artisan serve
-    Assurez-vous que PHP 8.1+, Composer et SQLite/MySQL sont installés.
 
-3. Installer le frontend Vue
-Dans un autre terminal :
-cd WebMobUI52-fullstack
-npm install
-composer run dev
+php artisan key:generate
+
+php artisan migrate --seed
+
+composer artisan serve
+    Assurez-vous que PHP 8.1+, Composer et SQLite/MySQL sont installés.
 
 L'application est finalement accessible via http://127.0.0.1:8000
 

@@ -51,6 +51,7 @@ class StoryController extends Controller
 
     public function getFirstChapter(Story $story): JsonResponse
     {
+        
         $chapter = $story->chapters()
             ->with('choices')
             ->orderBy('chapter_number')
